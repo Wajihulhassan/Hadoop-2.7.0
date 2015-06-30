@@ -293,7 +293,36 @@ public class SLSRunner {
           }
           List<ContainerSimulator> containerList =
                   new ArrayList<ContainerSimulator>();
+
+          /* 
+            Start -Wajih - Changing Code to use Florin SLS traces
+            Generating no of tasks with c.nr key of a particular job.
+  
+          */
+          int memOpt=-1;
           for (Object o : tasks) {
+            Map jsonTask = (Map) o;
+            String hostname = jsonTask.get("c.host").toString();
+            long lifeTime = Long.parseLong(jsonTask.get("c.dur").toString());
+            int priority = Integer.parseInt(jsonTask.get("c.prio").toString());
+            int memory = Integer.parseInt(jsonTask.get("c.mem").toString());
+            String type = jsonTask.get("c.type").toString();
+            int nr_tasks_of_this_kind = Integer.parseInt(jsonTask.get("c.nr").toString());
+
+            memOpt=memory;
+            for(int i_ctr=0;i_ctr<nr_tasks_of_this_kind;i_ctr++){ 
+              Resource containerRes = BuilderUtils.newResource(memory, 1);
+              containerList.add(new ContainerSimulator(containerRes,lifeTime, hostname, priority, type));
+            }
+
+          }
+
+          /* End -Wajih */
+
+          /*
+            Code Backup
+
+            for (Object o : tasks) {
             Map jsonTask = (Map) o;
             String hostname = jsonTask.get("container.host").toString();
             long taskStart = Long.parseLong(
@@ -308,6 +337,8 @@ public class SLSRunner {
                     lifeTime, hostname, priority, type));
           }
 
+          */
+
           // create a new AM
           String amType = jsonJob.get("am.type").toString();
           AMSimulator amSim = (AMSimulator) ReflectionUtils.newInstance(
@@ -316,6 +347,10 @@ public class SLSRunner {
             amSim.init(AM_ID++, heartbeatInterval, containerList, rm,
                     this, jobStartTime, jobFinishTime, user, queue,
                     isTracked, oldAppId);
+
+          // TODO Need funtion to incorportate following florin modification
+          // amSim.setOptimalMemoryRequest(memOpt); 
+            
             runner.schedule(amSim);
             maxRuntime = Math.max(maxRuntime, jobFinishTime);
             numTasks += containerList.size();
