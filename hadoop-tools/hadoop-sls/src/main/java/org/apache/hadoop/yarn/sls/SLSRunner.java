@@ -451,7 +451,7 @@ public class SLSRunner {
   private void printSimulationInfo() {
     if (printSimulation) {
       // node
-      LOG.info("------------------------------------");
+      LOG.info("-------------Print Simulations-----------------------");
       LOG.info(MessageFormat.format("# nodes = {0}, # racks = {1}, capacity " +
               "of each node {2} MB memory and {3} vcores.",
               numNMs, numRacks, nmMemoryMB, nmVCores));
