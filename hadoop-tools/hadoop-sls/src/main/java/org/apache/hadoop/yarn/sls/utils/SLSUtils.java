@@ -98,7 +98,7 @@ public class SLSUtils {
         List tasks = (List) jsonE.get("job.tasks");
         for (Object o : tasks) {
           Map jsonTask = (Map) o;
-          String hostname = jsonTask.get("container.host").toString();
+          String hostname = jsonTask.get("c.host").toString();
           nodeSet.add(hostname);
         }
       }
