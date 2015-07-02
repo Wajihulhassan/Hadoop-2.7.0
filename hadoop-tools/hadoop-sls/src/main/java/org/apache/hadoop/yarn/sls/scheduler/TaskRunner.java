@@ -137,14 +137,22 @@ public class TaskRunner {
   private int threadPoolSize;
   private ThreadPoolExecutor executor;
   private long startTimeMS = 0;
+
+  /*Start - Wajih changing Thread Pool size*/
+  private boolean unboundedRunner = false;
+  /*End - Wajih */
   
   public TaskRunner() {
     queue = new DelayQueue();
   }
 
-  public void setQueueSize(int threadPoolSize) {
+  /*Start - Wajih changing Thread Pool size*/
+ public void setQueueSize(int threadPoolSize, boolean unboundedRunner) {
     this.threadPoolSize = threadPoolSize;
+    this.unboundedRunner = unboundedRunner;
   }
+  /*End - Wajih */
+
 
   @SuppressWarnings("unchecked")
   public void start() {
@@ -154,9 +162,26 @@ public class TaskRunner {
     DelayQueue preStartQueue = queue;
 
     queue = new DelayQueue();
-    executor = new ThreadPoolExecutor(threadPoolSize, threadPoolSize, 0,
-      TimeUnit.MILLISECONDS, queue);
-    executor.prestartAllCoreThreads();
+
+/*Start - Wajih changing Thread Pool size*/
+  if (!unboundedRunner) {
+        executor = new ThreadPoolExecutor(threadPoolSize, threadPoolSize, 0,
+          TimeUnit.MILLISECONDS, queue);
+        executor.prestartAllCoreThreads();
+    } else {
+        executor = new ThreadPoolExecutor(Integer.MAX_VALUE, Integer.MAX_VALUE, 0,
+          TimeUnit.MILLISECONDS, queue);
+        int numPrestartThreads = threadPoolSize;
+        if (preStartQueue.size() > numPrestartThreads) {
+            numPrestartThreads = preStartQueue.size();
+        }
+
+        for (int i = 0 ; i < numPrestartThreads ; i++) {
+            executor.prestartCoreThread();
+        }
+    }
+
+/*End - Wajih */
 
     startTimeMS = System.currentTimeMillis();
     for (Object d : preStartQueue) {

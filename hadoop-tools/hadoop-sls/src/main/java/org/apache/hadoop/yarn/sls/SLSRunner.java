@@ -124,8 +124,15 @@ public class SLSRunner {
     conf.addResource("sls-runner.xml");
     // runner
     int poolSize = conf.getInt(SLSConfiguration.RUNNER_POOL_SIZE, 
-                                SLSConfiguration.RUNNER_POOL_SIZE_DEFAULT); 
-    SLSRunner.runner.setQueueSize(poolSize);
+                                SLSConfiguration.RUNNER_POOL_SIZE_DEFAULT);
+
+    
+    /* 
+    Start - Wajih- Setting Pool Size unbounded default was 10 
+      
+    */
+
+    SLSRunner.runner.setQueueSize(poolSize,true);
     // <AMType, Class> map
     for (Map.Entry e : conf) {
       String key = e.getKey().toString();
