@@ -315,7 +315,8 @@ public class SLSRunner {
             int memory = Integer.parseInt(jsonTask.get("c.mem").toString());
             String type = jsonTask.get("c.type").toString();
             int nr_tasks_of_this_kind = Integer.parseInt(jsonTask.get("c.nr").toString());
-
+            System.out.println("host: "+hostname+" runtime: "+lifeTime+
+              " prio: "+priority+" mem: "+memory+" type: "+type+" nr_tasks: "+nr_tasks_of_this_kind+"--");
             memOpt=memory;
             for(int i_ctr=0;i_ctr<nr_tasks_of_this_kind;i_ctr++){ 
               Resource containerRes = BuilderUtils.newResource(memory, 1);

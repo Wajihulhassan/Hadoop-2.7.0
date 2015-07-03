@@ -164,6 +164,8 @@ public class TaskRunner {
     queue = new DelayQueue();
 
 /*Start - Wajih changing Thread Pool size*/
+  System.out.println("~~~~~~~ WAJIH: ThreadS Execution Start ");
+
   if (!unboundedRunner) {
         executor = new ThreadPoolExecutor(threadPoolSize, threadPoolSize, 0,
           TimeUnit.MILLISECONDS, queue);
@@ -180,7 +182,7 @@ public class TaskRunner {
             executor.prestartCoreThread();
         }
     }
-
+System.out.println("~~~~~~~ WAJIH: ThreadS Execution End ");
 /*End - Wajih */
 
     startTimeMS = System.currentTimeMillis();

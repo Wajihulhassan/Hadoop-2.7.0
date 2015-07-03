@@ -194,6 +194,12 @@ public abstract class AMSimulator extends TaskRunner.Task {
          .addAMRuntime(appId, 
                       traceStartTimeMS, traceFinishTimeMS, 
                       simulateStartTimeMS, simulateFinishTimeMS);
+
+    /*Start -Wajih*/
+    System.out.println("~~~~ WAJIH am simulator last step"+traceStartTimeMS +  " "+ traceFinishTimeMS+ " "+ 
+                      " "+simulateStartTimeMS+ " "+ simulateFinishTimeMS);
+    /*End - Wajih*/
+
   }
   
   protected ResourceRequest createResourceRequest(
