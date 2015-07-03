@@ -31,7 +31,7 @@ public class TestTaskRunner {
   @Before
   public void setUp() {
     runner = new TaskRunner();
-    runner.setQueueSize(5);
+    runner.setQueueSize(5,false);
   }
 
   @After
