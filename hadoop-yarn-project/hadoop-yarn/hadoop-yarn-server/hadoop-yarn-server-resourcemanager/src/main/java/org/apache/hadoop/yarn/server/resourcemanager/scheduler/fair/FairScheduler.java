@@ -981,10 +981,25 @@ public class FairScheduler extends
         attemptScheduling(node);
       }
     } else {
+      
+      /*  Start Wajih 
+      Adding Timers to check decision delays*/
+      long beforeTime = System.currentTimeMillis();
+      /* End */
+      
       attemptScheduling(node);
+      
+      /*  Start Wajih 
+      Adding Timers to check decision delays*/
+      long afterTime = System.currentTimeMillis();
+      int dec_time = (int)(afterTime-beforeTime);
+      System.out.println("~~~~~~ WAJIH Time incurred in attempting scheduling == " + dec_time );
+
+      /* End */
     }
 
     long duration = getClock().getTime() - start;
+    System.out.println("~~~~~~ WAJIH Duration for complete nodeupdate function == " + duration );
     fsOpDurations.addNodeUpdateDuration(duration);
   }
 
