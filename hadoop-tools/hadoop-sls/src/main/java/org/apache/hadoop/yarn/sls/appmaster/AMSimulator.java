@@ -190,15 +190,16 @@ public abstract class AMSimulator extends TaskRunner.Task {
     simulateFinishTimeMS = System.currentTimeMillis() -
         SLSRunner.getRunner().getStartTimeMS();
     // record job running information
+           /*Start -Wajih*/
+    System.out.println("~~~~ WAJIH am simulator last step"+traceStartTimeMS +  " "+ traceFinishTimeMS+ " "+ 
+                      " "+ simulateStartTimeMS+ " "+ simulateFinishTimeMS);
+    /*End - Wajih*/
     ((ResourceSchedulerWrapper)rm.getResourceScheduler())
          .addAMRuntime(appId, 
                       traceStartTimeMS, traceFinishTimeMS, 
                       simulateStartTimeMS, simulateFinishTimeMS);
 
-    /*Start -Wajih*/
-    System.out.println("~~~~ WAJIH am simulator last step"+traceStartTimeMS +  " "+ traceFinishTimeMS+ " "+ 
-                      " "+simulateStartTimeMS+ " "+ simulateFinishTimeMS);
-    /*End - Wajih*/
+ 
 
   }
   
