@@ -83,13 +83,16 @@ public class SLSWebApp extends HttpServlet {
     // load templates
     ClassLoader cl = Thread.currentThread().getContextClassLoader();
     try {
+      System.out.println(" ~~~~ IN webapp " );
       simulateInfoTemplate = FileUtils.readFileToString(new File(
               cl.getResource("simulate.info.html.template").getFile()));
+      System.out.println(" ~~~~ IN webapp 2 " );
       simulateTemplate = FileUtils.readFileToString(new File(
               cl.getResource("simulate.html.template").getFile()));
       trackTemplate = FileUtils.readFileToString(new File(
               cl.getResource("track.html.template").getFile()));
     } catch (IOException e) {
+      System.out.println(" ~~~ Message is " + e.getMessage());
       e.printStackTrace();
     }
   }
