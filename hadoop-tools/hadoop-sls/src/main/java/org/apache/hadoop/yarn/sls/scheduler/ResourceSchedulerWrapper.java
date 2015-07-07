@@ -736,7 +736,6 @@ public class ResourceSchedulerWrapper
         jobRuntimeLogBW.write(sb.toString() + EOL);
         jobRuntimeLogBW.flush();
       } catch (IOException e) {
-        System.out.println(e.getMessage());
         e.printStackTrace();
       }
     }
