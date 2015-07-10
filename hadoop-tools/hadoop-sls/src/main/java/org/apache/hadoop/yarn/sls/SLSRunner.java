@@ -174,7 +174,7 @@ public class SLSRunner {
     rmConf.set(YarnConfiguration.RM_SCHEDULER_ADDRESS, "0.0.0.0:" + String.valueOf(port_rand+2));
     rmConf.set(YarnConfiguration.RM_ADDRESS, "0.0.0.0:" + String.valueOf(port_rand+3));
     rmConf.set(YarnConfiguration.RM_ADMIN_ADDRESS, "0.0.0.0:" + String.valueOf(port_rand+4));
-    rmConf.set((SLSConfiguration.METRICS_WEB_ADDRESS_PORT, String.valueOf(port_rand+5));
+    rmConf.set(SLSConfiguration.METRICS_WEB_ADDRESS_PORT, String.valueOf(port_rand+5));
 
     String schedulerClass = rmConf.get(YarnConfiguration.RM_SCHEDULER);
     rmConf.set(SLSConfiguration.RM_SCHEDULER, schedulerClass);
