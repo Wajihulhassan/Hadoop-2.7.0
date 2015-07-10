@@ -976,7 +976,7 @@ public class FifoScheduler extends
   /* Start-Wajih Get decision stats */
   @Override
   public String getDecisionTimeStats() {
-    return "";
+    return " ";
   }
 
   /* END -wajih*/
