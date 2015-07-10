@@ -164,7 +164,18 @@ public class SLSRunner {
   }
   
   private void startRM() throws IOException, ClassNotFoundException {
+
     Configuration rmConf = new YarnConfiguration();
+    /* -Wajih Assigning Random Port to run multiple SLS instances on same machine */
+    int rand =  new Random();
+    int port_rand = (rand.nextInt(65300-49152)) + 49152;
+    rmConf.set(YarnConfiguration.RM_WEBAPP_ADDRESS, "0.0.0.0:" + String.valueOf(port_rand));
+    rmConf.set(YarnConfiguration.RM_RESOURCE_TRACKER_ADDRESS, "0.0.0.0:" + String.valueOf(port_rand+1));
+    rmConf.set(YarnConfiguration.RM_SCHEDULER_ADDRESS, "0.0.0.0:" + String.valueOf(port_rand+2));
+    rmConf.set(YarnConfiguration.RM_ADDRESS, "0.0.0.0:" + String.valueOf(port_rand+3));
+    rmConf.set(YarnConfiguration.RM_ADMIN_ADDRESS, "0.0.0.0:" + String.valueOf(port_rand+4));
+    rmConf.set((SLSConfiguration.METRICS_WEB_ADDRESS_PORT, String.valueOf(port_rand+5));
+
     String schedulerClass = rmConf.get(YarnConfiguration.RM_SCHEDULER);
     rmConf.set(SLSConfiguration.RM_SCHEDULER, schedulerClass);
     rmConf.set(YarnConfiguration.RM_SCHEDULER,
