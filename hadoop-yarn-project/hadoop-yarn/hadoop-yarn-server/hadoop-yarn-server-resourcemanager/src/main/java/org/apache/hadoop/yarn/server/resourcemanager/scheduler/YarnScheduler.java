@@ -286,4 +286,9 @@ public interface YarnScheduler extends EventHandler<SchedulerEvent> {
    * @return an EnumSet containing the resource types
    */
   public EnumSet<SchedulerResourceTypes> getSchedulingResourceTypes();
+
+
+  /* Wajih*/
+
+  public String getDecisionTimeStats();
 }
