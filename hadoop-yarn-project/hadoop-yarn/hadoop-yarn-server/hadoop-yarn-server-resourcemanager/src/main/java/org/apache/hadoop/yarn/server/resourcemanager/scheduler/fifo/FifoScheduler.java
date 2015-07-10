@@ -973,4 +973,11 @@ public class FifoScheduler extends
   public Resource getUsedResource() {
     return usedResource;
   }
+  /* Start-Wajih Get decision stats */
+  @Override
+  public String getDecisionTimeStats() {
+    return decision_time.toString();  
+  }
+
+  /* END -wajih*/
 }

@@ -1636,4 +1636,12 @@ public class CapacityScheduler extends
     }
     return ret;
   }
+
+    /* Start-Wajih Get decision stats */
+  @Override
+  public String getDecisionTimeStats() {
+    return decision_time.toString();  
+  }
+
+  /* END -wajih*/
 }
