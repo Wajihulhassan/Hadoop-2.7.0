@@ -280,7 +280,7 @@ public class ResourceSchedulerWrapper
 
       if (schedulerEvent.getType() == SchedulerEventType.APP_REMOVED
           && schedulerEvent instanceof AppRemovedSchedulerEvent) {
-        SLSRunner.decreaseRemainingApps();
+        SLSRunner.decreaseRemainingApps(scheduler.getDecisionTimeStats());
         AppRemovedSchedulerEvent appRemoveEvent =
                 (AppRemovedSchedulerEvent) schedulerEvent;
         appQueueMap.remove(appRemoveEvent.getApplicationID());

@@ -520,15 +520,16 @@ public class SLSRunner {
     return runner;
   }
 
-  public static void decreaseRemainingApps() {
+  /* Start Wajih To print decision timing at the end */
+  public static void decreaseRemainingApps(String decision_timings) {
     remainingApps --;
-
     if (remainingApps == 0) {
       LOG.info("SLSRunner tears down.");
+      System.out.println(decision_timings);
       System.exit(0);
     }
   }
-
+  /* END wajih*/
   public static void main(String args[]) throws Exception {
     Options options = new Options();
     options.addOption("inputrumen", true, "input rumen files");

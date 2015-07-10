@@ -185,6 +185,11 @@ public class FairScheduler extends
                                     // heartbeat
   protected int maxAssign; // Max containers to assign per heartbeat
 
+
+  /* Start -Wajih  Measuring decision timings*/
+  public int[] decision_time;
+  /* End - Wajih*/
+
   @VisibleForTesting
   final MaxRunningAppsEnforcer maxRunningEnforcer;
 
@@ -198,6 +203,9 @@ public class FairScheduler extends
     allocsLoader = new AllocationFileLoaderService();
     queueMgr = new QueueManager(this);
     maxRunningEnforcer = new MaxRunningAppsEnforcer(this);
+    /*Start Wajih Measuring decision timings*/
+    decision_time = new int[10000];
+    /* End Wajih */
   }
 
   private void validateConf(Configuration conf) {
@@ -994,6 +1002,8 @@ public class FairScheduler extends
       Adding Timers to check decision delays*/
       long afterTime = System.currentTimeMillis();
       int dec_time = (int)(afterTime-beforeTime);
+
+      decision_time[dec_time]++;
       /* End */
     }
 
@@ -1696,4 +1706,11 @@ public class FairScheduler extends
     }
     return targetQueueName;
   }
+
+  /* Start-Wajih Get decision stats */
+  public String getDecisionTimeStats() {
+    return decision_time.toString();  
+  }
+
+  /* END -wajih*/
 }
