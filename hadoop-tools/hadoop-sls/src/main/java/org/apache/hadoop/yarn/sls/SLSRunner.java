@@ -167,7 +167,7 @@ public class SLSRunner {
 
     Configuration rmConf = new YarnConfiguration();
     /* -Wajih Assigning Random Port to run multiple SLS instances on same machine */
-    int rand =  new Random();
+    Random rand =  new Random();
     int port_rand = rand.nextInt(65300-49152) + 49152;
     rmConf.set(YarnConfiguration.RM_WEBAPP_ADDRESS, "0.0.0.0:" + String.valueOf(port_rand));
     rmConf.set(YarnConfiguration.RM_RESOURCE_TRACKER_ADDRESS, "0.0.0.0:" + String.valueOf(port_rand+1));
