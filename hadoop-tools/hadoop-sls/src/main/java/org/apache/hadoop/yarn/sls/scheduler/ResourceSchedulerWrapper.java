@@ -947,5 +947,12 @@ public class ResourceSchedulerWrapper
       ContainerStatus containerStatus, RMContainerEventType event) {
     // do nothing
   }
+  /* Start-Wajih Get decision stats */
+  @Override
+  public String getDecisionTimeStats() {
+    return " ";
+  }
+
+  /* END -wajih*/
 }
 
