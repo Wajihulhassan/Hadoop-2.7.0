@@ -89,6 +89,7 @@ import org.apache.hadoop.yarn.util.resource.DominantResourceCalculator;
 import org.apache.hadoop.yarn.util.resource.ResourceCalculator;
 import org.apache.hadoop.yarn.util.resource.Resources;
 
+
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Preconditions;
 
@@ -1710,7 +1711,37 @@ public class FairScheduler extends
   /* Start-Wajih Get decision stats */
   @Override
   public String getDecisionTimeStats() {
-    return decision_time.toString();  
+    
+      String my_string = Arrays.toString(decision_time);
+      return my_string 
+    /*
+    String decision_str="";
+    long tmp_sum=0;
+    long tmp_sum2=0;
+    for(int i=0;i<=5;i++)
+      tmp_sum+=decisionArray[i];
+      decision_str+="  0-5: "+tmp_sum+" "+((int)((tmp_sum*1.0/totalDec)*10000))/100.0+"%";
+      tmp_sum2+=tmp_sum;
+      tmp_sum=0;
+    for(int i=6;i<=10;i++)
+      tmp_sum+=decisionArray[i];
+      decision_str+="  5-10: "+tmp_sum+" "+((int)((tmp_sum*1.0/totalDec)*10000))/100.0+"%";
+      tmp_sum2+=tmp_sum;
+ 
+      tmp_sum=0;
+    for(int i=11;i<=25;i++)
+      tmp_sum+=decisionArray[i];
+      decision_str+="  10-25: "+tmp_sum+" "+((int)((tmp_sum*1.0/totalDec)*10000))/100.0+"%";
+      tmp_sum2+=tmp_sum;
+ 
+      tmp_sum=0;
+    for(int i=26;i<=50;i++)
+      tmp_sum+=decisionArray[i];
+      decision_str+="  25-50: "+tmp_sum+" "+((int)((tmp_sum*1.0/totalDec)*10000))/100.0+"%";
+      tmp_sum2+=tmp_sum;
+      return decision_str;
+
+      */
   }
 
   /* END -wajih*/

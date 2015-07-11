@@ -525,7 +525,7 @@ public class SLSRunner {
     remainingApps --;
     if (remainingApps == 0) {
       LOG.info("SLSRunner tears down.");
-      System.out.println(decision_timings);
+      System.out.println(" This is decision time array = " + decision_timings);
       System.exit(0);
     }
   }
