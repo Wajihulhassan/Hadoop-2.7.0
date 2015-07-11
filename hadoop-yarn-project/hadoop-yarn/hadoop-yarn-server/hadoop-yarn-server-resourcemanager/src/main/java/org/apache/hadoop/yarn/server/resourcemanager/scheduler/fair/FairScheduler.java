@@ -1713,7 +1713,7 @@ public class FairScheduler extends
   public String getDecisionTimeStats() {
     
       String my_string = Arrays.toString(decision_time);
-      return my_string 
+      return my_string ;
     /*
     String decision_str="";
     long tmp_sum=0;
