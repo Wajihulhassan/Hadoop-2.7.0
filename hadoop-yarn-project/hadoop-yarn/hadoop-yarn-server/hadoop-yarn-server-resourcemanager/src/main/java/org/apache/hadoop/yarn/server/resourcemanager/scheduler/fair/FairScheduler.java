@@ -1755,7 +1755,8 @@ public class FairScheduler extends
       if(decision_time[i] >=1){
         max_time=i;
       }
-
+    }
+    
       dec_string+="Max Time : ";
       dec_string+=max_time;
       dec_string+=" ---- ";
@@ -1773,8 +1774,6 @@ public class FairScheduler extends
       dec_string+="\n";
       dec_string+="Percentage of decision timings >25 Millisecond = ";
       dec_string+=((part_10_25*1.0)/no_of_decisions)*100;
-
-    }
     return dec_string;
     /*
     String decision_str="";
