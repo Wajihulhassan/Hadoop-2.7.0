@@ -1733,7 +1733,7 @@ public class FairScheduler extends
 
     System.out.println("No of decisions are = " + no_of_decisions);
     for(int i=0 ; i<dec_array_size; i++){
-      if(i>0 && i<=5)
+      if(i>=0 && i<=5)
         part_0_5+=decision_time[i];
       if(i>5 && i<=10)
         part_5_10+=decision_time[i];
@@ -1751,13 +1751,6 @@ public class FairScheduler extends
     }
     long tmp = part_0_5+part_5_10+part_10_25+part_25_inf;
     System.out.println("Sum of array elements = " + tmp);
-
-    System.out.println(Arrays.toString(decision_time));
-
-    int sum = 0;
-    for (int i : decision_time)
-      sum += i;
-    System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~ "+sum);
 
       dec_string+="Max Time : ";
       dec_string+=max_time;
@@ -1781,34 +1774,7 @@ public class FairScheduler extends
       dec_string+="Percentage of decision timings >25 Millisecond = ";
       dec_string+=((part_25_inf*1.0)/no_of_decisions)*100;
     return dec_string;
-    /*
-    String decision_str="";
-    long tmp_sum=0;
-    long tmp_sum2=0;
-    for(int i=0;i<=5;i++)
-      tmp_sum+=decisionArray[i];
-      decision_str+="  0-5: "+tmp_sum+" "+((int)((tmp_sum*1.0/totalDec)*10000))/100.0+"%";
-      tmp_sum2+=tmp_sum;
-      tmp_sum=0;
-    for(int i=6;i<=10;i++)
-      tmp_sum+=decisionArray[i];
-      decision_str+="  5-10: "+tmp_sum+" "+((int)((tmp_sum*1.0/totalDec)*10000))/100.0+"%";
-      tmp_sum2+=tmp_sum;
- 
-      tmp_sum=0;
-    for(int i=11;i<=25;i++)
-      tmp_sum+=decisionArray[i];
-      decision_str+="  10-25: "+tmp_sum+" "+((int)((tmp_sum*1.0/totalDec)*10000))/100.0+"%";
-      tmp_sum2+=tmp_sum;
- 
-      tmp_sum=0;
-    for(int i=26;i<=50;i++)
-      tmp_sum+=decisionArray[i];
-      decision_str+="  25-50: "+tmp_sum+" "+((int)((tmp_sum*1.0/totalDec)*10000))/100.0+"%";
-      tmp_sum2+=tmp_sum;
-      return decision_str;
-
-      */
+   
   }
 
   /* END -wajih*/
