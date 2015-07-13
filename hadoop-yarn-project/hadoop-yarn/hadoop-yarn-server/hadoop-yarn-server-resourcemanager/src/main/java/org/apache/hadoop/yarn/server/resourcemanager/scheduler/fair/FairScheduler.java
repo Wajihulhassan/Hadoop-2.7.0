@@ -187,8 +187,13 @@ public class FairScheduler extends
   protected int maxAssign; // Max containers to assign per heartbeat
 
 
+
+
   /* Start -Wajih  Measuring decision timings*/
+  public int dec_array_size=10000; 
   public int[] decision_time;
+  public long no_of_decisions;
+
   /* End - Wajih*/
 
   @VisibleForTesting
@@ -205,7 +210,7 @@ public class FairScheduler extends
     queueMgr = new QueueManager(this);
     maxRunningEnforcer = new MaxRunningAppsEnforcer(this);
     /*Start Wajih Measuring decision timings*/
-    decision_time = new int[10000];
+    decision_time = new int[dec_array_size];
     /* End Wajih */
   }
 
@@ -954,6 +959,8 @@ public class FairScheduler extends
     }
   }
   
+
+
   /**
    * Process a heartbeat update from a node.
    */
@@ -985,12 +992,20 @@ public class FairScheduler extends
           completedContainer, RMContainerEventType.FINISHED);
     }
 
+    /*  Start Wajih 
+      Adding Timers to check decision delays*/
+    no_of_decisions++;
+     /* End */
+
+
     if (continuousSchedulingEnabled) {
       if (!completedContainers.isEmpty()) {
         attemptScheduling(node);
       }
     } else {
-      
+     
+
+
       /*  Start Wajih 
       Adding Timers to check decision delays*/
       long beforeTime = System.currentTimeMillis();
@@ -1712,8 +1727,54 @@ public class FairScheduler extends
   @Override
   public String getDecisionTimeStats() {
     
-      String my_string = Arrays.toString(decision_time);
-      return my_string ;
+    int max_time;
+    int min_time;
+
+    // Break down the decision time space into 4 spaces;
+    long part_0_5=0;
+    long part_5_10=0;
+    long part_10_25=0;
+    long part_25_inf=0;
+    String dec_string=" ";
+    boolean flag=true;
+
+    for(int i =0 ; i< dec_array_size;i++){
+      if(i>0 && i<=5)
+        part_0_5+=decision_time[i];
+      if(i>5 && i<=10)
+        part_5_10+=decision_time[i];
+      if(i>10 && i<=25)
+        part_10_25+=decision_time[i];
+      if(i>25)
+        part_25_inf+=decision_time[i];
+      if(flag && decision_time[i] >=1){
+        min_time=i;
+        flag=false;
+      }
+      if(decision_time[i] >=1){
+        max_time=i;
+      }
+
+      dec_string+="Max Time : ";
+      dec_string+=max_time;
+      dec_string+=" ---- ";
+      dec_string+="Min Time : ";
+      dec_string+=min_time;
+      dec_string+="\n";
+      dec_string+="Percentage of decision timings in between 0-5 Millisecond = ";
+      dec_string+=((part_0_5*1.0)/no_of_decisions)*100;
+      dec_string+="\n";
+      dec_string+="Percentage of decision timings in between 5-10 Millisecond = ";
+      dec_string+=((part_5_10*1.0)/no_of_decisions)*100;
+      dec_string+="\n";
+      dec_string+="Percentage of decision timings in between 10-25 Millisecond = ";
+      dec_string+=((part_10_25*1.0)/no_of_decisions)*100;
+      dec_string+="\n";
+      dec_string+="Percentage of decision timings >25 Millisecond = ";
+      dec_string+=((part_10_25*1.0)/no_of_decisions)*100;
+
+    }
+    return dec_string;
     /*
     String decision_str="";
     long tmp_sum=0;
