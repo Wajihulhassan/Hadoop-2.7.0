@@ -992,13 +992,6 @@ public class FairScheduler extends
       completedContainer(getRMContainer(containerId),
           completedContainer, RMContainerEventType.FINISHED);
     }
-
-    /*  Start Wajih 
-      Adding Timers to check decision delays*/
-    no_of_decisions++;
-     /* End */
-
-
     if (continuousSchedulingEnabled) {
       if (!completedContainers.isEmpty()) {
         attemptScheduling(node);
@@ -1022,6 +1015,7 @@ public class FairScheduler extends
       dec_time = (int)(afterTime-beforeTime);
 
       decision_time[dec_time]++;
+      no_of_decisions++;
       /* End */
     }
 
