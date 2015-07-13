@@ -190,7 +190,7 @@ public class FairScheduler extends
 
 
   /* Start -Wajih  Measuring decision timings*/
-  public int dec_array_size=10000; 
+  public int dec_array_size; 
   public int[] decision_time;
   public long no_of_decisions;
 
@@ -210,7 +210,7 @@ public class FairScheduler extends
     queueMgr = new QueueManager(this);
     maxRunningEnforcer = new MaxRunningAppsEnforcer(this);
     /*Start Wajih Measuring decision timings*/
-    dec_array_size=10000;
+    dec_array_size=100000;
     decision_time = new int[dec_array_size];
     /* End Wajih */
   }
@@ -1018,7 +1018,8 @@ public class FairScheduler extends
     
       Adding Timers to check decision delays*/
       long afterTime = System.currentTimeMillis();
-      int dec_time = (int)(afterTime-beforeTime);
+      int dec_time = 0;
+      dec_time = (int)(afterTime-beforeTime);
 
       decision_time[dec_time]++;
       /* End */
@@ -1739,7 +1740,7 @@ public class FairScheduler extends
     String dec_string=" ";
     boolean flag=true;
     System.out.println("No of decisions are = " + no_of_decisions);
-    for(int i=0 ; i<10000; i++){
+    for(int i=0 ; i<dec_array_size; i++){
       if(i>0 && i<=5)
         part_0_5+=decision_time[i];
       if(i>5 && i<=10)
