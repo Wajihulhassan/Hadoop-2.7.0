@@ -212,6 +212,7 @@ public class FairScheduler extends
     /*Start Wajih Measuring decision timings*/
     dec_array_size=100000;
     decision_time = new int[dec_array_size];
+    no_of_decisions=0;
     /* End Wajih */
   }
 
@@ -1758,16 +1759,20 @@ public class FairScheduler extends
       dec_string+="Min Time : ";
       dec_string+=min_time;
       dec_string+="\n";
-      dec_string+=(part_0_5+part_5_10+part_10_25+part_25_inf);
+      long tmp = part_0_5+part_5_10+part_10_25+part_25_inf;
+      dec_string+=tmp;
       dec_string+="\n";
       dec_string+="Percentage of decision timings in between 0-5 Millisecond = ";
-      dec_string+=((part_0_5*1.0)/no_of_decisions)*100;
+      double tmp1=((part_0_5*1.0)/no_of_decisions)*100;
+      dec_string+=tmp1;
       dec_string+="\n";
       dec_string+="Percentage of decision timings in between 5-10 Millisecond = ";
-      dec_string+=((part_5_10*1.0)/no_of_decisions)*100;
+      double tmp2 =((part_5_10*1.0)/no_of_decisions)*100;
+      dec_string+=tmp2;
       dec_string+="\n";
       dec_string+="Percentage of decision timings in between 10-25 Millisecond = ";
-      dec_string+=((part_10_25*1.0)/no_of_decisions)*100;
+      double tmp3+= ((part_10_25*1.0)/no_of_decisions)*100;
+      dec_string+= tmp3;
       dec_string+="\n";
       dec_string+="Percentage of decision timings >25 Millisecond = ";
       dec_string+=((part_25_inf*1.0)/no_of_decisions)*100;
