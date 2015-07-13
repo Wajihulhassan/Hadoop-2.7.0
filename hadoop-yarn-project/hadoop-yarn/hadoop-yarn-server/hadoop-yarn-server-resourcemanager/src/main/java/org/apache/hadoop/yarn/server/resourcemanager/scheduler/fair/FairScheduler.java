@@ -1764,6 +1764,8 @@ public class FairScheduler extends
       dec_string+="Min Time : ";
       dec_string+=min_time;
       dec_string+="\n";
+      dec_string+=(part_0_5+part_5_10+part_10_25+part_25_inf);
+      dec_string+="\n";
       dec_string+="Percentage of decision timings in between 0-5 Millisecond = ";
       dec_string+=((part_0_5*1.0)/no_of_decisions)*100;
       dec_string+="\n";
