@@ -1763,7 +1763,7 @@ public class FairScheduler extends
       dec_string+=tmp;
       dec_string+="\n";
       dec_string+="Percentage of decision timings in between 0-5 Millisecond = ";
-      double tmp1=((part_0_5*1.0)/no_of_decisions)*100;
+      double tmp1 =((part_0_5*1.0)/no_of_decisions)*100;
       dec_string+=tmp1;
       dec_string+="\n";
       dec_string+="Percentage of decision timings in between 5-10 Millisecond = ";
@@ -1771,7 +1771,7 @@ public class FairScheduler extends
       dec_string+=tmp2;
       dec_string+="\n";
       dec_string+="Percentage of decision timings in between 10-25 Millisecond = ";
-      double tmp3+= ((part_10_25*1.0)/no_of_decisions)*100;
+      double tmp3 = ((part_10_25*1.0)/no_of_decisions)*100;
       dec_string+= tmp3;
       dec_string+="\n";
       dec_string+="Percentage of decision timings >25 Millisecond = ";
