@@ -1727,7 +1727,7 @@ public class FairScheduler extends
   /* Start-Wajih Get decision stats*/
   @Override
   public String getDecisionTimeStats() {
-    /*
+    
     int max_time=0;
     int min_time=0;
 
@@ -1738,8 +1738,8 @@ public class FairScheduler extends
     long part_25_inf=0;
     String dec_string=" ";
     boolean flag=true;
-
-    for(int i =0 ; i< dec_array_size;i++){
+    System.out.println("No of decisions are = " + no_of_decisions);
+    for(int i=0 ; i<10000; i++){
       if(i>0 && i<=5)
         part_0_5+=decision_time[i];
       if(i>5 && i<=10)
@@ -1775,8 +1775,7 @@ public class FairScheduler extends
       dec_string+=((part_10_25*1.0)/no_of_decisions)*100;
 
     }
-    */
-    return "~~~~~~~~~~~Decision Statistics~~~~~";
+    return dec_string;
     /*
     String decision_str="";
     long tmp_sum=0;
