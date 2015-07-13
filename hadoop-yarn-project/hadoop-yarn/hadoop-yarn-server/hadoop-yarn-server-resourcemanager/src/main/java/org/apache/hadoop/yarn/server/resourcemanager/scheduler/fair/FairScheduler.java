@@ -210,6 +210,7 @@ public class FairScheduler extends
     queueMgr = new QueueManager(this);
     maxRunningEnforcer = new MaxRunningAppsEnforcer(this);
     /*Start Wajih Measuring decision timings*/
+    dec_array_size=10000;
     decision_time = new int[dec_array_size];
     /* End Wajih */
   }
@@ -1723,10 +1724,10 @@ public class FairScheduler extends
     return targetQueueName;
   }
 
-  /* Start-Wajih Get decision stats */
+  /* Start-Wajih Get decision stats*/
   @Override
   public String getDecisionTimeStats() {
-    
+    /*
     int max_time=0;
     int min_time=0;
 
@@ -1774,7 +1775,8 @@ public class FairScheduler extends
       dec_string+=((part_10_25*1.0)/no_of_decisions)*100;
 
     }
-    return dec_string;
+    */
+    return "~~~~~~~~~~~Decision Statistics~~~~~";
     /*
     String decision_str="";
     long tmp_sum=0;

@@ -521,11 +521,11 @@ public class SLSRunner {
   }
 
   /* Start Wajih To print decision timing at the end */
-  public static void decreaseRemainingApps(String decision_timings) {
+  public static void decreaseRemainingApps(ResourceScheduler class_rs) {
     remainingApps --;
     if (remainingApps == 0) {
       LOG.info("SLSRunner tears down.");
-      System.out.println(" This is decision time array = " + decision_timings);
+      System.out.println(" This is decision time array = " + class_rs.getDecisionTimeStats());
       System.exit(0);
     }
   }
