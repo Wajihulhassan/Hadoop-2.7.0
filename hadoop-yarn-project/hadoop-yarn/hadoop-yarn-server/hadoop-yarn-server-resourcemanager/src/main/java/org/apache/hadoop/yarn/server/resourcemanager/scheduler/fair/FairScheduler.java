@@ -1727,8 +1727,8 @@ public class FairScheduler extends
   @Override
   public String getDecisionTimeStats() {
     
-    int max_time;
-    int min_time;
+    int max_time=0;
+    int min_time=0;
 
     // Break down the decision time space into 4 spaces;
     long part_0_5=0;
