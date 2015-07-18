@@ -193,6 +193,9 @@ public class FairScheduler extends
   public int dec_array_size; 
   public int[] decision_time;
   public int no_of_decisions;
+  public int[] resr_decision_time;
+  public int[] no_resr_decision_time;
+  public int[] total_decision_time;
 
   /* End - Wajih*/
 
@@ -213,6 +216,11 @@ public class FairScheduler extends
     dec_array_size=20000;
     decision_time = new int[dec_array_size];
     no_of_decisions = 0;
+
+    resr_decision_time= new int[10000];
+    no_resr_decision_time= new int[10000];
+    total_decision_time = new int[20000];
+
     /* End Wajih */
   }
 
@@ -1018,6 +1026,9 @@ public class FairScheduler extends
 
     long duration = getClock().getTime() - start;
     fsOpDurations.addNodeUpdateDuration(duration);
+    /* Start - Wajih*/
+    total_decision_time[duration]++;
+    /* End */
   }
 
   void continuousSchedulingAttempt() throws InterruptedException {
@@ -1078,6 +1089,10 @@ public class FairScheduler extends
 
     FSAppAttempt reservedAppSchedulable = node.getReservedAppSchedulable();
     if (reservedAppSchedulable != null) {
+       /*  Start Wajih 
+      Adding Timers to check decision delays*/
+      long beforeTime = System.currentTimeMillis();
+      /* End*/
       Priority reservedPriority = node.getReservedContainer().getReservedPriority();
       FSQueue queue = reservedAppSchedulable.getQueue();
 
@@ -1099,9 +1114,25 @@ public class FairScheduler extends
         }
         node.getReservedAppSchedulable().assignReservedContainer(node);
       }
+       /*  Start Wajih 
+      Adding Timers to check decision delays*/
+      long afterTime = System.currentTimeMillis();
+      int dec_time = 0;
+      dec_time = (int)(afterTime-beforeTime);
+
+      resr_decision_time[dec_time]++;
+
+      /* END */
+
     }
     if (reservedAppSchedulable == null) {
       // No reservation, schedule at queue which is farthest below fair share
+
+      /*  Start Wajih 
+      Adding Timers to check decision delays*/
+      long beforeTime = System.currentTimeMillis();
+      /* End*/
+
       int assignedContainers = 0;
       while (node.getReservedContainer() == null) {
         boolean assignedContainer = false;
@@ -1114,6 +1145,15 @@ public class FairScheduler extends
         if (!assignMultiple) { break; }
         if ((assignedContainers >= maxAssign) && (maxAssign > 0)) { break; }
       }
+
+      /*  Start Wajih 
+      Adding Timers to check decision delays*/
+      long afterTime = System.currentTimeMillis();
+      int dec_time = 0;
+      dec_time = (int)(afterTime-beforeTime);
+
+      no_resr_decision_time[dec_time]++;
+      /* END */
     }
     updateRootQueueMetrics();
   }
@@ -1722,6 +1762,7 @@ public class FairScheduler extends
     
     int max_time=0;
     int min_time=0;
+    int max_time_total=0;
 
     // Break down the decision time space into 4 spaces;
     long part_0_5=0;
@@ -1748,6 +1789,10 @@ public class FairScheduler extends
       if(decision_time[i] >=1){
         max_time=i;
       }
+      if(total_decision_time[i] >=1){
+        max_time_total=i;
+      }
+
     }
     long tmp = part_0_5+part_5_10+part_10_25+part_25_inf;
     System.out.println("Sum of array elements = " + tmp);
@@ -1773,6 +1818,27 @@ public class FairScheduler extends
       dec_string+="\n";
       dec_string+="Percentage of decision timings >25 Millisecond = ";
       dec_string+=((part_25_inf*1.0)/no_of_decisions)*100;
+      dec_string+="\n";
+
+
+      int max_time_resr=0;
+      int max_time_no_resr=0;
+      for(int i=0;i<10000; i++){
+        if(resr_decision_time[i]>=1)
+          max_time_resr=i;
+        if(no_resr_decision_time[i]>=1)
+          max_time_no_resr=i;
+      }
+      dec_string+="Max Time for resr : ";
+      dec_string+=max_time_resr;
+      dec_string+="\n";
+      dec_string+="Max Time for no_resr: ";
+      dec_string+=max_time_no_resr;
+      dec_string+="\n";
+      dec_string+="Max Time for TOTAL: ";
+      dec_string+=max_time_total;
+      dec_string+="\n";
+
     return dec_string;
    
   }
