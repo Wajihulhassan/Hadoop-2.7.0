@@ -1027,7 +1027,7 @@ public class FairScheduler extends
     long duration = getClock().getTime() - start;
     fsOpDurations.addNodeUpdateDuration(duration);
     /* Start - Wajih*/
-    total_decision_time[duration]++;
+    total_decision_time[(int)duration]++;
     /* End */
   }
 
