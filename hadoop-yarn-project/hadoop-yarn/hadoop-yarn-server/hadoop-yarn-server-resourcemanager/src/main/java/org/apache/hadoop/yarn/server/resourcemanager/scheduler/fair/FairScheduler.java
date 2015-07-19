@@ -193,7 +193,7 @@ public class FairScheduler extends
   public int dec_array_size; 
   public int[] decision_time;
   public int no_of_decisions;
-  public int[] resr_decision_time;
+  public static int[] resr_decision_time;
   public int[] no_resr_decision_time;
   public int[] total_decision_time;
 
@@ -1088,10 +1088,6 @@ public class FairScheduler extends
 
     FSAppAttempt reservedAppSchedulable = node.getReservedAppSchedulable();
     if (reservedAppSchedulable != null) {
-       /*  Start Wajih 
-      Adding Timers to check decision delays*/
-      long beforeTime = System.currentTimeMillis();
-      /* End*/
       Priority reservedPriority = node.getReservedContainer().getReservedPriority();
       FSQueue queue = reservedAppSchedulable.getQueue();
 
@@ -1112,14 +1108,6 @@ public class FairScheduler extends
               + " on node: " + node);
         }
         node.getReservedAppSchedulable().assignReservedContainer(node);
-        /*  Start Wajih 
-        Adding Timers to check decision delays*/
-        
-        int dec_time = node.getReservedAppSchedulable().getDecisionTiming();
-
-        resr_decision_time[dec_time]++;
-
-        /* END */
 
       }
 
@@ -1127,10 +1115,6 @@ public class FairScheduler extends
     if (reservedAppSchedulable == null) {
       // No reservation, schedule at queue which is farthest below fair share
 
-      /*  Start Wajih 
-      Adding Timers to check decision delays*/
-      long beforeTime = System.currentTimeMillis();
-      /* End*/
 
       int assignedContainers = 0;
       while (node.getReservedContainer() == null) {
@@ -1145,14 +1129,7 @@ public class FairScheduler extends
         if ((assignedContainers >= maxAssign) && (maxAssign > 0)) { break; }
       }
 
-      /*  Start Wajih 
-      Adding Timers to check decision delays*/
-      long afterTime = System.currentTimeMillis();
-      int dec_time = 0;
-      dec_time = (int)(afterTime-beforeTime);
 
-      no_resr_decision_time[dec_time]++;
-      /* END */
     }
     updateRootQueueMetrics();
   }

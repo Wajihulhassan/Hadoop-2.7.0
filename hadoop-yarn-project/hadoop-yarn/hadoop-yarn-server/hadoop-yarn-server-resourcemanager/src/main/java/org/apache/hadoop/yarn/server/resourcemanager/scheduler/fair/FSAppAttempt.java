@@ -532,6 +532,7 @@ public class FSAppAttempt extends SchedulerApplicationAttempt
       long afterTime = System.currentTimeMillis();
       
       fs_decision_time = (int)(afterTime-beforeTime);
+      FairScheduler.resr_decision_time[fs_decision_time]++;
       /* End*/
       if (allocatedContainer == null) {
         // Did the application need this resource?
@@ -671,7 +672,7 @@ public class FSAppAttempt extends SchedulerApplicationAttempt
   public Resource assignReservedContainer(FSSchedulerNode node) {
     RMContainer rmContainer = node.getReservedContainer();
     Priority priority = rmContainer.getReservedPriority();
-    fs_decision_time=0;
+
     // Make sure the application still needs requests at this priority
     if (getTotalRequiredResources(priority) == 0) {
       unreserve(priority, node);
