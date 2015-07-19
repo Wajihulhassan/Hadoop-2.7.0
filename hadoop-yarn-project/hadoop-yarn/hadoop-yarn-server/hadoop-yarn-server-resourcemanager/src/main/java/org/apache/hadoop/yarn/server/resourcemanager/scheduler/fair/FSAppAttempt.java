@@ -671,7 +671,7 @@ public class FSAppAttempt extends SchedulerApplicationAttempt
   public Resource assignReservedContainer(FSSchedulerNode node) {
     RMContainer rmContainer = node.getReservedContainer();
     Priority priority = rmContainer.getReservedPriority();
-
+    fs_decision_time=0;
     // Make sure the application still needs requests at this priority
     if (getTotalRequiredResources(priority) == 0) {
       unreserve(priority, node);
