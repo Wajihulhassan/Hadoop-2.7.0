@@ -78,6 +78,12 @@ public class FSAppAttempt extends SchedulerApplicationAttempt
   private RMContainerComparator comparator = new RMContainerComparator();
   private final Map<RMContainer, Long> preemptionMap = new HashMap<RMContainer, Long>();
 
+  /* statr - Wajih Measuring decision timings*/
+    public int fs_decision_time
+  /* End*/
+
+
+
   /**
    * Delay scheduling: We often want to prioritize scheduling of node-local
    * containers over rack-local or off-switch containers. To achieve this
@@ -100,6 +106,10 @@ public class FSAppAttempt extends SchedulerApplicationAttempt
     this.startTime = scheduler.getClock().getTime();
     this.priority = Priority.newInstance(1);
     this.resourceWeights = new ResourceWeights();
+
+    /* Start - Wajih */
+      fs_decision_time =0;
+    /* END*/
   }
 
   public ResourceWeights getResourceWeights() {
@@ -504,8 +514,25 @@ public class FSAppAttempt extends SchedulerApplicationAttempt
     // Can we allocate a container on this node?
     if (Resources.fitsIn(capability, available)) {
       // Inform the application of the new container for this request
+
+      /*Start  - WAJIH */
+
+      fs_decision_time=0;
+
+      long beforeTime = System.currentTimeMillis();
+
+      /* End*/
+
       RMContainer allocatedContainer =
           allocate(type, node, request.getPriority(), request, container);
+
+
+       /*  Start Wajih 
+      Adding Timers to check decision delays*/
+      long afterTime = System.currentTimeMillis();
+      
+      fs_decision_time = (int)(afterTime-beforeTime);
+      /* End*/
       if (allocatedContainer == null) {
         // Did the application need this resource?
         if (reserved) {
@@ -800,4 +827,10 @@ public class FSAppAttempt extends SchedulerApplicationAttempt
     }
     return toBePreempted;
   }
+
+  /*Start -Wajih */
+  public int getDecisionTiming(){
+    return fs_decision_time;
+  }
+  /* End*/
 }

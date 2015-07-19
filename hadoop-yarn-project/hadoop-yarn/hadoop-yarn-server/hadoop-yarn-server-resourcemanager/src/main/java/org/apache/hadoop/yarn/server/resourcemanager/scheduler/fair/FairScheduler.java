@@ -1008,7 +1008,6 @@ public class FairScheduler extends
     } else {
      
 
-
       /*  Start Wajih 
       Adding Timers to check decision delays*/
       long beforeTime = System.currentTimeMillis();
@@ -1116,9 +1115,8 @@ public class FairScheduler extends
       }
        /*  Start Wajih 
       Adding Timers to check decision delays*/
-      long afterTime = System.currentTimeMillis();
-      int dec_time = 0;
-      dec_time = (int)(afterTime-beforeTime);
+      
+      int dec_time = node.getReservedAppSchedulable().getDecisionTiming();
 
       resr_decision_time[dec_time]++;
 
