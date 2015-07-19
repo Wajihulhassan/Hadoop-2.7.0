@@ -79,7 +79,7 @@ public class FSAppAttempt extends SchedulerApplicationAttempt
   private final Map<RMContainer, Long> preemptionMap = new HashMap<RMContainer, Long>();
 
   /* statr - Wajih Measuring decision timings*/
-    public int fs_decision_time
+    public int fs_decision_time;
   /* End*/
 
 
