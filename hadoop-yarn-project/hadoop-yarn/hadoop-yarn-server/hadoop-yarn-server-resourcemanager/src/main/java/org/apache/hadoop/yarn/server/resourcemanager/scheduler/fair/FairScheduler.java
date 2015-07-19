@@ -1112,15 +1112,16 @@ public class FairScheduler extends
               + " on node: " + node);
         }
         node.getReservedAppSchedulable().assignReservedContainer(node);
+        /*  Start Wajih 
+        Adding Timers to check decision delays*/
+        
+        int dec_time = node.getReservedAppSchedulable().getDecisionTiming();
+
+        resr_decision_time[dec_time]++;
+
+        /* END */
+
       }
-       /*  Start Wajih 
-      Adding Timers to check decision delays*/
-      
-      int dec_time = node.getReservedAppSchedulable().getDecisionTiming();
-
-      resr_decision_time[dec_time]++;
-
-      /* END */
 
     }
     if (reservedAppSchedulable == null) {
